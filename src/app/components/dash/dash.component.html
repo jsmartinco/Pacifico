@@ -1,0 +1,35 @@
+<app-menu></app-menu>
+
+
+<div class="container">
+    <h2>Gestión de casos</h2>
+    <br><br>
+    <h3>Filtros</h3>
+    <br><br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">MUNICIPIO</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">DIRECCION</th>
+                <th scope="col">PRIORIDAD</th>
+                <th scope="col">DIFERENCIA</th>
+                <th scope="col">ASIGNADO A:</th>
+                <th scope="col">DETALLE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ticket of tickets">
+                <td>{{ticket.ticketid}}</td>
+                <td>{{ticket.invoice.customer.town.tname}}</td>
+                <td>{{ticket.state}}</td>
+                <td>{{ticket.invoice.customer.address}}</td>
+                <td>{{ticket.invoice.customer.priority}}</td>
+                <td>{{ticket.difference}}</td>
+                <td>{{ticket.employee.name}}</td>
+                <td><button class="btn btn-outline-primary" routerLink="detail/{{ticket.ticketid}}">Detalle</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,119 @@
+<app-menu></app-menu>
+
+<form (ngSubmit)="onClose(forma)" #forma="ngForm">
+    <div class="row container">
+        <h2 class="mb-5">Detalle caso: {{ticket.ticketid}}</h2>
+        <div class="col-md-6">
+            <div class="row mb-3 form-group">
+                <label for="Municipio" class="col-sm-2 col-form-label">Municipio: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="town" id="town" ngModel placeholder="{{ticket.tname}}" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Direccion: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="address" id="Direccion" ngModel placeholder="{{ticket.address}}" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre Cliente: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="name" name="cname" [(ngModel)]="ticket.cname" [class.is-invalid]="cname.invalid && cname.touched" #cname="ngModel" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Info adicional: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="additionalinfo" id="Info adicional" [(ngModel)]="ticket.additionalinfo" [class.is-invalid]="additionalinfo.invalid && additionalinfo.touched" #additionalinfo="ngModel" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Tipo de documento: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="typedocument" id="Tipo de documento" [(ngModel)]="ticket.typedocument" [class.is-invalid]="typedocument.invalid && typedocument.touched" #typedocument="ngModel" required>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="row mb-3 form-group">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Documento: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="Documento" name="document" [(ngModel)]="ticket.document" [class.is-invalid]="document.invalid && document.touched" #document="ngModel" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Prioridad: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="Prioridad" name="priority" ngModel placeholder="{{ticket.priority}}" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Estado: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="Estado" name="state" [ngModel]="ticket.state" placeholder="{{ticket.state}}" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Diferencia en Kwh: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="Diferencia" ngModel name="difference" placeholder="{{ticket.difference}}" readonly>
+                </div>
+            </div>
+            <div class="row mb-3" *ngIf="isAdmin">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Asignado a: </label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="employee" ngModel name="employee" [(ngModel)]="ticket.name" [class.is-invalid]="name.invalid && name.touched" #name="ngModel" required>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 mt-4">
+            <label for="exampleFormControlTextarea1" class="form-label"> Observaciones: </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="observations" [(ngModel)]="ticket.observations" [class.is-invalid]="observations.invalid && observations.touched" #observations="ngModel" required> </textarea>
+        </div>
+
+        <div class="class row">
+            <div class="class col md-6">
+                <b>¿Incurrio en Fraude?</b><br>
+                <div class="form-check">
+
+                    <input class="form-check-input" type="radio" name="options" id="fraude" [(ngModel)]="ticket.fraud" [value]="1" [checked]="options">
+                    <label class="form-check-label" for="flexRadioDefault1">
+          Si
+        </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="options" id="fraude" [(ngModel)]="ticket.fraud" [value]="0" [checked]="!options">
+                    <label class="form-check-label" for="flexRadioDefault2">
+          No
+        </label>
+                </div>
+            </div>
+            <div class="col container">
+                <div class="btn-group me-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-primary" (click)="onUpdate()">Volver</button>
+                </div>
+                <div class="btn-group me-3" role="group" aria-label="second group">
+                    <button type="submit" class="btn btn-success">Cerrar caso</button>
+                </div>
+            </div>
+        </div><br><br><br>
+    </div>
+
+    <br>
+    <div class="row container">
+        <div class="col md-6">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Tipo de fraude</label>
+                <select class="form-select" id="inputGroupSelect01" name="conditions" [(ngModel)]="ticket.conditions">
+              <option selected>Escoge...</option>
+              <option value="Robo a tercero">Robo a tercero</option>
+              <option value="Conexión ilegal">Conexión ilegal</option>
+              <option value="Contador alterado">Contador alterado</option>
+            </select>
+            </div>
+        </div>
+
+    </div>
+</form>
